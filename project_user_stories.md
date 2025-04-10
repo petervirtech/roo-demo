@@ -13,7 +13,9 @@
      - A confirmation message should be displayed upon successful order submission.
 
 3. **As a menu manager**, I want to manage the menu items so that I can update the available options for employees.
+7. **As a user**, I want to be able to place an order for a future date so that I can plan my meals in advance, with a maximum of one week in advance.
    - Acceptance Criteria:
+     - The system should allow me to select a date for my order that is within one week from today.
      - The system should allow me to add, edit, or remove menu items.
      - Changes to the menu should be reflected in the user interface immediately.
 

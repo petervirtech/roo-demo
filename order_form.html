@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunch Order Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 400px; margin: auto; }
+        label { display: block; margin: 10px 0 5px; }
+        input, select { width: 100%; padding: 8px; margin-bottom: 10px; }
+        button { padding: 10px; background-color: #28a745; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Place Your Order</h1>
+        <form id="orderForm">
+            <label for="employeeName">Employee Name:</label>
+            <input type="text" id="employeeName" required>
+
+            <label for="mealType">Meal Type:</label>
+            <select id="mealType" required>
+                <option value="sandwich">Sandwich</option>
+                <option value="salad">Salad</option>
+            </select>
+
+            <div id="sandwichOptions" style="display: none;">
+                <label for="breadType">Bread Type:</label>
+                <select id="breadType">
+                    <option value="brown">Brown</option>
+                    <option value="white">White</option>
+                </select>
+
+                <label for="kind">Kind:</label>
+                <select id="kind" multiple>
+                    <option value="Tuna">Tuna</option>
+                    <option value="Egg">Egg</option>
+                    <option value="Chicken">Chicken</option>
+                    <option value="BLT">BLT</option>
+                </select>
+            </div>
+
+            <button type="submit">Submit Order</button>
+        </form>
+        <div id="confirmationMessage" style="display: none;"></div>
+    </div>
+
+    <script>
+        document.getElementById('mealType').addEventListener('change', function() {
+            const sandwichOptions = document.getElementById('sandwichOptions');
+            sandwichOptions.style.display = this.value === 'sandwich' ? 'block' : 'none';
+        });
+
+        document.getElementById('orderForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const employeeName = document.getElementById('employeeName').value;
+            const mealType = document.getElementById('mealType').value;
+            const breadType = mealType === 'sandwich' ? document.getElementById('breadType').value : null;
+            const kind = mealType === 'sandwich' ? Array.from(document.getElementById('kind').selectedOptions).map(option => option.value) : [];
+
+            const order = {
+                employeeName,
+                mealType,
+                breadType,
+                kind
+            };
+
+            // Send order to backend (API endpoint to be implemented)
+            console.log('Order submitted:', order);
+            document.getElementById('confirmationMessage').innerText = 'Order placed successfully!';
+            document.getElementById('confirmationMessage').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
