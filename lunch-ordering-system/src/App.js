@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import OrderForm from './OrderForm';
+import OrderForm from './OrderForm.tsx';
 
 function App() {
     return (

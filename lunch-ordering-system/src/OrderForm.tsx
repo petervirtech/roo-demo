@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
+import { SelectChangeEvent } from '@mui/material';
 import { TextField, Select, MenuItem, Button, FormControl, InputLabel } from '@mui/material';
 
-const OrderForm = () => {
-    const [employeeName, setEmployeeName] = useState('');
-    const [mealType, setMealType] = useState('sandwich');
-    const [breadType, setBreadType] = useState('brown');
-    const [kind, setKind] = useState([]);
+
+
+const OrderForm: React.FC = () => {
+    const [employeeName, setEmployeeName] = useState<string>('');
+    const [mealType, setMealType] = useState<string>('sandwich');
+    const [breadType, setBreadType] = useState<string>('brown');
+    const [kind, setKind] = useState<string[]>([]);
 
     // const { order, setOrder } = useContext(OrderContext);
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const orderData = {
             employeeName,
@@ -30,7 +33,7 @@ const OrderForm = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(order),
+                body: JSON.stringify(orderData),
             });
             if (response.ok) {
                 console.log('Order successfully sent to the backend');
@@ -80,7 +83,7 @@ const OrderForm = () => {
                         <Select
                             multiple
                             value={kind}
-                            onChange={(e) => setKind([...e.target.selectedOptions].map(option => option.value))}
+                            onChange={(e: SelectChangeEvent<string[]>) => setKind([...e.target.value as string[]])}
                             renderValue={(selected) => selected.join(', ')}
                         >
                             <MenuItem value="Tuna">Tuna</MenuItem>
