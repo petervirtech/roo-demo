@@ -6,7 +6,7 @@
         "-y",
         "@supabase/mcp-server-supabase@latest",
         "--access-token",
-        "sbp_31037673ec0492cd0de4ac22a02ac89507f407b7"
+        "${SUPABASE_ACCESS_TOKEN}"
       ],
       "alwaysAllow": [
         "list_projects",
